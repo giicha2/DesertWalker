@@ -20,7 +20,7 @@
 AMyBotAIController::AMyBotAIController(FObjectInitializer const& object_intializer)
 {
 	PrimaryActorTick.bCanEverTick = true;
-
+	//
 	static ConstructorHelpers::FObjectFinder<UBehaviorTree>obj(TEXT("BehaviorTree'/Game/_My/AI/Bot_Melee_BT.Bot_Melee_BT'"));
 	if (obj.Succeeded())
 	{
