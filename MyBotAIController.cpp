@@ -15,17 +15,18 @@
 #include "Runtime/Engine/Classes/Engine/World.h"
 #include "GameFramework/Character.h"
 #include "MyPlayerCharacter.h"
+#include "MyBotCharacter.h"
 #include "Engine.h"
 
 AMyBotAIController::AMyBotAIController(FObjectInitializer const& object_intializer)
 {
 	PrimaryActorTick.bCanEverTick = true;
-	//
-	static ConstructorHelpers::FObjectFinder<UBehaviorTree>obj(TEXT("BehaviorTree'/Game/_My/AI/Bot_Melee_BT.Bot_Melee_BT'"));
-	if (obj.Succeeded())
-	{
-		btree = obj.Object;
-	}
+
+	//static ConstructorHelpers::FObjectFinder<UBehaviorTree>obj(TEXT("BehaviorTree'/Game/_My/AI/Bot_Melee_BT.Bot_Melee_BT'"));
+	//if (obj.Succeeded())
+	//{
+	//	btree = obj.Object;
+	//}
 	behavior_tree_Comp = object_intializer.CreateAbstractDefaultSubobject<UBehaviorTreeComponent>(this, TEXT("BehaviorComp"));
 	blackboard = object_intializer.CreateAbstractDefaultSubobject<UBlackboardComponent>(this, TEXT("BlackboardComp"));
 
@@ -37,16 +38,26 @@ void AMyBotAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	RunBehaviorTree(btree);
-	behavior_tree_Comp->StartTree(*btree);
+	//RunBehaviorTree(btree);
+	//behavior_tree_Comp->StartTree(*btree);
 }
 
 void AMyBotAIController::OnPossess(APawn* Pawn)
 {
 	Super::OnPossess(Pawn);
-	if (blackboard)
+	//if (blackboard)
+	//{
+	//	blackboard->InitializeBlackboard(*btree->BlackboardAsset);
+	//}
+
+	AMyBotCharacter* Bot = Cast<AMyBotCharacter>(Pawn);
+	if (Bot && Bot->BotBehavior)
 	{
-		blackboard->InitializeBlackboard(*btree->BlackboardAsset);
+		if (Bot->BotBehavior->BlackboardAsset)
+		{
+			blackboard->InitializeBlackboard(*Bot->BotBehavior->BlackboardAsset);
+		}
+		behavior_tree_Comp->StartTree(*(Bot->BotBehavior));
 	}
 }
 

@@ -13,11 +13,37 @@ AMyBasicCharacter::AMyBasicCharacter()
 
 }
 
+float AMyBasicCharacter::TakeDamage(float Damage, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	PlayAnimMontage(BeHit_AnimMontage, 1.0f);
+	if (MyHealth <= 0.0f)
+	{
+		return 0.0f;
+	}
+
+	const float ActualDamage = Super::TakeDamage(Damage, DamageEvent, EventInstigator, DamageCauser);
+
+	if (ActualDamage > 0.0f)
+	{
+		if (MyCharacterName == "Player")
+		{
+			MyHealth -= ActualDamage;
+			UE_LOG(LogTemp, Warning, TEXT("Player Character HP : %f"), MyHealth);
+		}
+		else 
+		{
+			MyHealth -= ActualDamage;
+		}
+	}
+	return 0.0f;
+}
+
 // Called when the game starts or when spawned
 void AMyBasicCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	MyHealth = MyMaxHealth;
 }
 
 // Called every frame

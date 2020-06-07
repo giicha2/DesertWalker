@@ -19,15 +19,19 @@ class DESERTWALKER_API AMyBotCharacter : public AMyBasicCharacter, public IComba
 public:
 	AMyBotCharacter();
 
-	UPROPERTY(EditAnywhere, Category = Behavior)
-		class UBehaviorTree* BotBehavior;
+	virtual void NotifyActorBeginOverlap(AActor* OtherActor)override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = MyState)
+		TSubclassOf<class AMyProjectile> MyBullet;
 
 	UPROPERTY(EditAnywhere, Category = Behavior)
-		UAnimMontage* Attack_Melee;
+		class UBehaviorTree* BotBehavior;
 
 	virtual int melee_attack_Implementation()override;
 
 	UAnimMontage* get_montage() const;
+
+	
 
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI", meta = (AllowPrivateAccess = "true"))

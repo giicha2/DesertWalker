@@ -15,6 +15,17 @@ public:
 	// Sets default values for this character's properties
 	AMyBasicCharacter();
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = MyState)
+		FName MyCharacterName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = MyState)
+		float MyMaxHealth;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = MyState)
+		float MyHealth;
+
+	virtual float TakeDamage(float Damage, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)override;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -38,4 +49,11 @@ public:
 	void Attack_Melee();
 
 	bool isDuringAttack = true;
+
+	UPROPERTY(EditDefaultsOnly, Category = "MyFX")
+		UParticleSystem* GetHitFX;
+
+	UPROPERTY(EditDefaultsOnly, Category = "MyFX")
+		UParticleSystem* DieFX;
+
 };
