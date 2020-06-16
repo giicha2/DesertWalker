@@ -42,6 +42,6 @@ public:
 	FORCEINLINE class USphereComponent* GetProjectileCollision()const { return CollisionComp; }
 	FORCEINLINE class UProjectileMovementComponent* GetProjectileMovement()const { return ProjectileMovement; }
 
-
+	virtual void NotifyActorBeginOverlap(AActor* OtherActor)override;
 
 };

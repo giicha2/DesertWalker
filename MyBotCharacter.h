@@ -22,6 +22,9 @@ public:
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor)override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = MyState)
+		class USphereComponent* WeaponCollisionSphere;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = MyState)
 		TSubclassOf<class AMyProjectile> MyBullet;
 
 	UPROPERTY(EditAnywhere, Category = Behavior)

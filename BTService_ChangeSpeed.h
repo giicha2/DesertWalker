@@ -22,6 +22,6 @@ protected:
 	FString GetStaticServiceDescription() const override;
 private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI", meta = (AllowPrivateAccess = "true"))
-		float speed = 500.0f;
+		float speed=0.0f;
 	
 };

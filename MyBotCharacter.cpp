@@ -8,9 +8,16 @@
 #include "MyPlayerCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/DamageType.h"
+#include "Components/SphereComponent.h"
+#include "GameFramework/Character.h"
+#include "Engine.h"
 
 AMyBotCharacter::AMyBotCharacter()
 {
+	WeaponCollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("WeaponCollisionSphere"));
+	WeaponCollisionSphere->InitSphereRadius(20.0f);
+	WeaponCollisionSphere->AttachTo(GetMesh(), "WeaponPoint");
+
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 }
 
@@ -21,7 +28,8 @@ void AMyBotCharacter::NotifyActorBeginOverlap(AActor* OtherActor)
 	if (OtherActor->IsA(AMyPlayerCharacter::StaticClass()) && PlayAnimMontage(montage) > 0.2f)
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, 10.0f, NULL, this, UDamageType::StaticClass());
-		UE_LOG(LogTemp, Warning, TEXT("Bot hit player!"));
+
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, __FUNCTION__);
 	}
 }
 

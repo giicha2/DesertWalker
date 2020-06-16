@@ -23,9 +23,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		class UCameraComponent* FollowCamera;
 
+	virtual void PostInitializeComponents()override;
+
 protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)override;
 	void MoveForward(float value);
 	void MoveRight(float value);
+
+public:
+	void Attack_Melee();
+	void Attack_Melee_End();
+
+
 
 };

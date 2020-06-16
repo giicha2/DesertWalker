@@ -35,12 +35,30 @@ void AMyProjectile::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 		if (OtherActor->IsA(AMyBasicCharacter::StaticClass()))
 		{
 			Destroy();
+
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, __FUNCTION__);
 		}
 	}
 }
 
 void AMyProjectile::OnHit(AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NomalImpulse, const FHitResult& Hit)
 {
+}
+
+void AMyProjectile::NotifyActorBeginOverlap(AActor* OtherActor)
+{
+	Super::NotifyActorBeginOverlap(OtherActor);
+
+	if (OtherActor && (OtherActor != this))
+	{
+		Destroy();
+		if (OtherActor->IsA(AMyBasicCharacter::StaticClass()))
+		{
+			UGameplayStatics::ApplyDamage(OtherActor, 10.0f, NULL, this, UDamageType::StaticClass());
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Blue, __FUNCTION__);
+		}
+
+	}
 }
 
 
