@@ -21,8 +21,8 @@ private:
 
 	bool isNowAttack;
 
-	UFUNCTION()
-		void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	/*UFUNCTION()
+		void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);*/
 
 public:
 	// Sets default values for this actor's properties
@@ -35,7 +35,7 @@ public:
 	void StartAttack();
 	void StopAttack();
 
-	//virtual void NotifyActorBeginOverlap(AActor* OtherActor)override;
+	virtual void NotifyActorBeginOverlap(AActor* OtherActor)override;
 
 
 protected:

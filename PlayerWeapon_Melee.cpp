@@ -28,7 +28,7 @@ APlayerWeapon_Melee::APlayerWeapon_Melee(const class FObjectInitializer& ObjectI
 	isNowAttack = false;
 
 
-	WeaponCollision->OnComponentBeginOverlap.AddDynamic(this, &APlayerWeapon_Melee::OnBeginOverlap);
+	//WeaponCollision->OnComponentBeginOverlap.AddDynamic(this, &APlayerWeapon_Melee::OnBeginOverlap);
 }
 
 //===============================================================================
@@ -82,33 +82,42 @@ void APlayerWeapon_Melee::StopAttack()
 	isNowAttack = false;
 }
 
-//void APlayerWeapon_Melee::NotifyActorBeginOverlap(AActor* OtherActor)
-//{
-//	Super::NotifyActorBeginOverlap(OtherActor);
-//
-//	AMyBotCharacter* MyBot = Cast<AMyBotCharacter>(OtherActor);
-//
-//	if (OtherActor->IsA(AActor::StaticClass()) && isNowAttack == true && OtherActor==MyBot)
-//	{
-//		UGameplayStatics::ApplyDamage(OtherActor, 50.0f, NULL, this, UDamageType::StaticClass());
-//		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
-//	}
-//}
-
-
-
-void APlayerWeapon_Melee::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void APlayerWeapon_Melee::NotifyActorBeginOverlap(AActor* OtherActor)
 {
+	Super::NotifyActorBeginOverlap(OtherActor);
+
 	AMyBotCharacter* MyBot = Cast<AMyBotCharacter>(OtherActor);
 
-	if (OtherActor->IsA(AActor::StaticClass()) && isNowAttack == true && OtherActor == MyBot)
+	if (OtherActor->IsA(AActor::StaticClass()) && isNowAttack == true && OtherActor==MyBot)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
-		UGameplayStatics::ApplyDamage(OtherActor, 50.0f, NULL, this, UDamageType::StaticClass());
-		//UGameplayStatics::ApplyDamage(OtherActor, 50.0f, NULL, GetOwner(), NULL);
+		if (IsValid !=nullptr)
+		{
+			//UGameplayStatics::ApplyDamage(OtherActor, 50.0f, NULL, this, UDamageType::StaticClass());
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
+		}
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, "nullptr");
+			return;
+		}
+		
 	}
-	/*if (OtherActor == this && OtherActor == GetOwner())
-	{		
-		return;
-	}*/	
 }
+
+
+
+//void APlayerWeapon_Melee::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+//{
+//	AMyBotCharacter* MyBot = Cast<AMyBotCharacter>(OtherActor);
+//
+//	if (OtherActor->IsA(AActor::StaticClass()) && isNowAttack == true && OtherActor == MyBot)
+//	{
+//		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
+//		UGameplayStatics::ApplyDamage(OtherActor, 50.0f, NULL, this, UDamageType::StaticClass());
+//		//UGameplayStatics::ApplyDamage(OtherActor, 50.0f, NULL, GetOwner(), NULL);
+//	}
+//	/*if (OtherActor == this && OtherActor == GetOwner())
+//	{		
+//		return;
+//	}*/	
+//}

@@ -38,6 +38,8 @@ void ASpawnPoint::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	
+
 	if (bSpawn)
 	{
 		currentTime = currentTime + 1 * DeltaTime;
@@ -47,15 +49,19 @@ void ASpawnPoint::Tick(float DeltaTime)
 			spawnParams.Owner = this;
 			spawnParams.Instigator = Instigator;
 
-			UWorld* WRLD = GetWorld();
+			//UWorld* WRLD = GetWorld();
 
 			FVector location = GetActorLocation();
 			FRotator rotation = GetActorRotation();
 
 			for (int i = 0; i < myBot.Num(); ++i)
 			{
-				AMyBotCharacter* myNewBot = WRLD->SpawnActor<AMyBotCharacter>(myBot[i], location, rotation);
-			}
+				AMyBotCharacter* myNewBot = GetWorld()->SpawnActor<AMyBotCharacter>(myBot[i], location, rotation);
+				//AMyBotCharacter* myNewBot = GetWorld()->SpawnActor<AMyBotCharacter>(myBot[i], location, rotation);
+				//AMyBotCharacter* myNewBot = WRLD->SpawnActor<AMyBotCharacter>(myBot[i], location, rotation);
+				//myNewBot->SpawnDefaultController();
+				//AMyBotCharacter* myNewBot = Cast<AMyBotCharacter>(GetWorld()->SpawnActor(AMyBotCharacter::StaticClass()));
+					}
 			
 
 			currentTime = 0.0f;
