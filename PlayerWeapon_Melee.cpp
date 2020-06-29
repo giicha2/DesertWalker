@@ -6,6 +6,7 @@
 #include "Engine.h"
 #include "Engine/EngineTypes.h"
 #include "MyBotCharacter.h"
+#include "MyPlayerCharacter.h"
 
 
 
@@ -88,19 +89,17 @@ void APlayerWeapon_Melee::NotifyActorBeginOverlap(AActor* OtherActor)
 
 	AMyBotCharacter* MyBot = Cast<AMyBotCharacter>(OtherActor);
 
-	if (OtherActor->IsA(AActor::StaticClass()) && isNowAttack == true && OtherActor==MyBot)
+	if (IsValid == nullptr)
 	{
-		if (IsValid !=nullptr)
+		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, "nullptr");
+	}
+	else
+	{
+		if (OtherActor->IsA(AActor::StaticClass()) && isNowAttack == true&&OtherActor==MyBot)
 		{
-			//UGameplayStatics::ApplyDamage(OtherActor, 50.0f, NULL, this, UDamageType::StaticClass());
+			UGameplayStatics::ApplyDamage(OtherActor, 10.0f, NULL, this, UDamageType::StaticClass());
 			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
 		}
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, "nullptr");
-			return;
-		}
-		
 	}
 }
 

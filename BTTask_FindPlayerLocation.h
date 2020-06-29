@@ -27,4 +27,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Search", meta = (AllowProtectedAccess = "true"))
 		float search_radius = 150.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI", meta = (AllowPrivateAccess = "true"))
+		float RangeToPlayer;
 };

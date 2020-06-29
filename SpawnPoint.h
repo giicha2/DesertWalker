@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "MyBasicCharacter.h"
 #include "MyBotCharacter.h"
 #include "SpawnPoint.generated.h"
 
@@ -37,10 +38,13 @@ public:
 		class USphereComponent* CollisionSphere;
 
 	UPROPERTY(EditAnywhere, Category = "MyBot")
-		TSubclassOf<AActor>ActorToSpawn;
+		TSubclassOf<AMyBotCharacter>WhatToSpawn;
 
 	UPROPERTY(EditAnywhere, Category = "MyBot")
-		TArray<TSubclassOf<AActor>>myBot;
+		TArray<TSubclassOf<class AMyBotCharacter>>myBot;
+
+
+	AMyBasicCharacter* MySpawn_Bot;
 
 private:
 	float currentTime;

@@ -2,6 +2,7 @@
 
 
 #include "BTService_ChangeSpeed.h"
+#include "MyBasicCharacter.h"
 #include "MyBotCharacter.h"
 #include "MyBotAIController.h"
 #include "GameFramework/Character.h"
@@ -20,6 +21,7 @@ void UBTService_ChangeSpeed::OnBecomeRelevant(UBehaviorTreeComponent& owner_comp
 	auto const cont = owner_comp.GetAIOwner();
 	AMyBotCharacter* const npcBot = Cast<AMyBotCharacter>(cont->GetPawn());
 	npcBot->GetCharacterMovement()->MaxWalkSpeed = speed;
+
 }
 
 FString UBTService_ChangeSpeed::GetStaticServiceDescription() const

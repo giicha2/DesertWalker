@@ -19,7 +19,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = MyState)
 		FName MyCharacterName;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = MyState)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = MyState)
 		float MyMaxHealth;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = MyState)
@@ -83,9 +83,11 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Pawn)
 		UAnimMontage* Death_AnimMontage;
 
-
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "MyState")
+	bool isDeath = false;
 
 	bool isDuringAttack = true;
+
 	int32 ComboAttack_Num;
 
 	UPROPERTY(EditDefaultsOnly, Category = "MyFX")
@@ -94,5 +96,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "MyFX")
 		UParticleSystem* DieFX;
 
+	float get_Health()const;
+	float get_maxHealth()const;
+	void set_health(float const new_health);
 
+private:
+	class UWidgetComponent* Widget_Component;
 };

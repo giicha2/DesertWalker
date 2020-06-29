@@ -34,9 +34,11 @@ public:
 
 	UAnimMontage* get_montage() const;
 
-	
+
 
 private:
+	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI", meta = (AllowPrivateAccess = "true"))
 		UAnimMontage* montage;
 };

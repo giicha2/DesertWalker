@@ -2,6 +2,7 @@
 
 
 #include "MyBotCharacter.h"
+#include "MyBasicCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "MyProjectile.h"
 #include "Engine/World.h"
@@ -25,7 +26,7 @@ void AMyBotCharacter::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	Super::NotifyActorBeginOverlap(OtherActor);
 
-	if (OtherActor->IsA(AMyPlayerCharacter::StaticClass()) && PlayAnimMontage(montage) > 0.2f)
+	if (OtherActor->IsA(AActor::StaticClass()) && PlayAnimMontage(montage) > 0.2f)
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, 10.0f, NULL, this, UDamageType::StaticClass());
 
@@ -57,3 +58,5 @@ UAnimMontage* AMyBotCharacter::get_montage() const
 {
 	return montage;
 }
+
+

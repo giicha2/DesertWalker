@@ -3,7 +3,7 @@
 
 #include "SpawnPoint.h"
 #include "Engine.h"
-#include "MyBotCharacter.h"
+#include "MyBasicCharacter.h"
 #include "MyPlayerCharacter.h"
 #include "Components/SphereComponent.h"
 #include "DrawDebugHelpers.h"
@@ -16,6 +16,7 @@ ASpawnPoint::ASpawnPoint()
 	PrimaryActorTick.bCanEverTick = true;
 
 	bSpawn = false;
+	//currentTime = 4.0f;
 
 	CollisionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("SpawnPointCom"));
 	CollisionSphere->InitSphereRadius(1000.0f);
@@ -38,7 +39,7 @@ void ASpawnPoint::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	
+
 
 	if (bSpawn)
 	{
@@ -54,14 +55,12 @@ void ASpawnPoint::Tick(float DeltaTime)
 			FVector location = GetActorLocation();
 			FRotator rotation = GetActorRotation();
 
+			
+
 			for (int i = 0; i < myBot.Num(); ++i)
 			{
-				AMyBotCharacter* myNewBot = GetWorld()->SpawnActor<AMyBotCharacter>(myBot[i], location, rotation);
-				//AMyBotCharacter* myNewBot = GetWorld()->SpawnActor<AMyBotCharacter>(myBot[i], location, rotation);
-				//AMyBotCharacter* myNewBot = WRLD->SpawnActor<AMyBotCharacter>(myBot[i], location, rotation);
-				//myNewBot->SpawnDefaultController();
-				//AMyBotCharacter* myNewBot = Cast<AMyBotCharacter>(GetWorld()->SpawnActor(AMyBotCharacter::StaticClass()));
-					}
+				AMyBotCharacter* const myNewBot = GetWorld()->SpawnActor<AMyBotCharacter>(myBot[i], location, rotation);
+			}
 			
 
 			currentTime = 0.0f;
