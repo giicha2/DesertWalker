@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Controller_StartMenu.h"
+#include "StartMenu_Controller.h"
 
-AController_StartMenu::AController_StartMenu()
+AStartMenu_Controller::AStartMenu_Controller()
 {
-
+	
 }

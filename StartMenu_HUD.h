@@ -14,4 +14,11 @@ class DESERTWALKER_API AStartMenu_HUD : public AHUD
 {
 	GENERATED_BODY()
 	
+public:
+	AStartMenu_HUD();
+	void BeginPlay()override;
+
+private:
+	TSubclassOf<class UUserWidget>uiBPClass;
+	UUserWidget* uiWidget;
 };

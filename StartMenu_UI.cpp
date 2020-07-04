@@ -20,7 +20,7 @@ void UStartMenu_UI::NativeConstruct()
 
 void UStartMenu_UI::Btn_StartGame_Clicked()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), "/Game/Level01");
+	UGameplayStatics::OpenLevel(GetWorld(), "World'/Game/Level01.Level01'");
 }
 
 void UStartMenu_UI::Btn_ExitGame_Clicked()

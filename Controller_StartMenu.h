@@ -13,5 +13,5 @@ UCLASS()
 class DESERTWALKER_API AController_StartMenu : public APlayerController
 {
 	GENERATED_BODY()
-	
+		AController_StartMenu();
 };
