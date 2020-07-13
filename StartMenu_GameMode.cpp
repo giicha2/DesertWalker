@@ -3,12 +3,13 @@
 
 #include "StartMenu_GameMode.h"
 #include "StartMenu_HUD.h"
-#include "StartMenu_Controller.h"
+#include "Controller_StartMenu.h"
+
 
 AStartMenu_GameMode::AStartMenu_GameMode()
 {
 	HUDClass = AStartMenu_HUD::StaticClass();
 	DefaultPawnClass = nullptr;
-	PlayerControllerClass = AStartMenu_Controller::StaticClass();
+	PlayerControllerClass = AController_StartMenu::StaticClass();
 }
 

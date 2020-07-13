@@ -39,8 +39,8 @@ void AMyPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMyPlayerCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMyPlayerCharacter::MoveRight);
-	PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AMyBasicCharacter::WeaponAttack);
-	PlayerInputComponent->BindAction("ChangeWeapon", IE_Pressed, this, &AMyBasicCharacter::OnChangeWeapon);
+	//PlayerInputComponent->BindAction("Attack", IE_Pressed, this, &AMyBasicCharacter::WeaponAttack);
+	//PlayerInputComponent->BindAction("ChangeWeapon", IE_Pressed, this, &AMyBasicCharacter::OnChangeWeapon);
 }
 
 void AMyPlayerCharacter::MoveForward(float value)

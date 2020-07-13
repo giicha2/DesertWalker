@@ -37,5 +37,5 @@ protected:
 	UUserWidget* CurrentWidget;
 
 public:
-	void ChangeUI();
+	//void ChangeUI();
 };

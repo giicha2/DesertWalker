@@ -3,25 +3,31 @@
 
 #include "DesertWalkerGameModeBase.h"
 #include "Blueprint/UserWidget.h"
-//#include "HUD_InGame.h"
+#include "GameHUD_HUD.h"
+#include "Controller_StartMenu.h"
+#include "UObject/ConstructorHelpers.h"
 
 ADesertWalkerGameModeBase::ADesertWalkerGameModeBase()
 {
-	//HUDClass = AHUD_InGame::StaticClass();
-	//DefaultPawnClass = nullptr;
-	//PlayerControllerClass=ADesertWalker
+	static ConstructorHelpers::FClassFinder<APawn> player(TEXT("/Game/_My/Mesh/MyPlayerCharacter_BP"));
+	if (player.Succeeded())
+	{
+		DefaultPawnClass = player.Class;
+	}
+
+	HUDClass = AGameHUD_HUD::StaticClass();
+	PlayerControllerClass = AController_StartMenu::StaticClass();
 }
 
 void ADesertWalkerGameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//gameStateEnum = EGameState::GameStart;
 	//ChangeUI();
 }
 
-void ADesertWalkerGameModeBase::ChangeUI()
-{
-	CurrentWidget = CreateWidget<UUserWidget>(GetWorld(),HUDWidgetClass);
-	CurrentWidget->AddToViewport();
-}
+//void ADesertWalkerGameModeBase::ChangeUI()
+//{
+//	CurrentWidget = CreateWidget<UUserWidget>(GetWorld(),HUDWidgetClass);
+//	CurrentWidget->AddToViewport();
+//}

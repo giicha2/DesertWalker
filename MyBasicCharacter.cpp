@@ -10,6 +10,7 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Blueprint/UserWidget.h"
 #include "HPBar.h"
+#include "GameHUD_UI.h"
 
 
 // Sets default values
@@ -153,11 +154,25 @@ void AMyBasicCharacter::Tick(float DeltaTime)
 
 	//make HPbar on the character head
 	auto const uw = Cast<UHPBar>(Widget_Component->GetUserWidgetObject());
-	if (uw)
+	auto const gameHUD_hpBar = Cast<UGameHUD_UI>(Widget_Component->GetUserWidgetObject());
+	float tempNum = MyHealth / MyMaxHealth;
+	if (MyCharacterName == "Player")
 	{
-		float tempNum = MyHealth / MyMaxHealth;
-		uw->set_bar_value_percent(tempNum);
+		if (gameHUD_hpBar)
+		{
+			gameHUD_hpBar->set_HUDbar_value_percent(tempNum);
+		}
 	}
+	else
+	{
+		if (uw)
+		{
+			uw->set_bar_value_percent(tempNum);
+		}
+	}
+
+
+
 }
 
 // Called to bind functionality to input

@@ -6,6 +6,7 @@
 
 void UStartMenu_UI::NativeConstruct()
 {
+
 	if (Btn_StartGame)
 	{
 		Btn_StartGame->OnClicked.AddDynamic(this, &UStartMenu_UI::Btn_StartGame_Clicked);
@@ -20,7 +21,7 @@ void UStartMenu_UI::NativeConstruct()
 
 void UStartMenu_UI::Btn_StartGame_Clicked()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), "World'/Game/Level01.Level01'");
+	UGameplayStatics::OpenLevel(GetWorld(), "/Game/Level01");
 }
 
 void UStartMenu_UI::Btn_ExitGame_Clicked()
