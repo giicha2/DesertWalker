@@ -17,6 +17,9 @@ ADesertWalkerGameModeBase::ADesertWalkerGameModeBase()
 
 	HUDClass = AGameHUD_HUD::StaticClass();
 	PlayerControllerClass = AController_StartMenu::StaticClass();
+
+	myCharacterName_Text = "Name : Desert Walker";
+	myCharacterLevel_Text = "Level : 10";
 }
 
 void ADesertWalkerGameModeBase::BeginPlay()

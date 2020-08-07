@@ -25,7 +25,7 @@ void UPlayer_AnimNotifyState::NotifyEnd(USkeletalMeshComponent* MeshComp, UAnimS
 		if (Player != NULL)
 		{
 			Player->Attack_Melee_End();
-			Player->isDuringAttack = false;
+			//Player->isDuringAttack = false;
 		}
 	}
 }

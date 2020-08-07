@@ -30,7 +30,6 @@ void AMyBotCharacter::NotifyActorBeginOverlap(AActor* OtherActor)
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, 10.0f, NULL, this, UDamageType::StaticClass());
 
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, __FUNCTION__);
 	}
 }
 

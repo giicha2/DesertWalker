@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Components/UniformGridSlot.h"
 #include "Controller_StartMenu.generated.h"
 
 /**
@@ -21,14 +22,32 @@ protected:
 public:
 	void ShowGameMenu();
 	void CloseGameMenu();
+
+	void ShowInventory();
+	void CreateItemSlots();
+	void CloseInventory();
+
 	void WeaponAttack();
 	void ChangeWeapon();
+	void ShowDieUI();
 
 	bool isShowGameMenu;
+	bool isShowInventory;
+
+
+	TSubclassOf<class UUserWidget>uiItemSlotBPClass;
+	UUserWidget* uiItemSlotWidget;
+
 private:
 	TSubclassOf<class UUserWidget>uiGameBPClass;
 	UUserWidget* uiGameWidget;
 
 	TSubclassOf<class UUserWidget>uiGameMenuBPClass;
 	UUserWidget* uiGameMenuWidget;
+
+	TSubclassOf<class UUserWidget>uiInventoryBPClass;
+	UUserWidget* uiInventoryWidget;
+
+	TSubclassOf<class UUserWidget>uiGameDieBPClass;
+	UUserWidget* uiGameDieWidget;
 };

@@ -7,8 +7,12 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Engine.h"
 
+
 AController_StartMenu::AController_StartMenu()
 {
+	isShowGameMenu = false;
+	isShowInventory = false;
+
 	static ConstructorHelpers::FClassFinder<UUserWidget> obj(TEXT("/Game/_My/UI/HUD_BP"));
 	if (obj.Succeeded())
 	{
@@ -30,7 +34,23 @@ AController_StartMenu::AController_StartMenu()
 		uiGameMenuBPClass = gamemenuUI.Class;
 	}
 
-	isShowGameMenu = false;
+	static ConstructorHelpers::FClassFinder<UUserWidget> InventoryUI(TEXT("/Game/_My/UI/Inventory_BP"));
+	if (InventoryUI.Succeeded())
+	{
+		uiInventoryBPClass = InventoryUI.Class;
+	}
+	
+	static ConstructorHelpers::FClassFinder<UUserWidget> ItmeSlot(TEXT("/Game/_My/UI/ItemSlot_BP"));
+	if (ItmeSlot.Succeeded())
+	{
+		uiItemSlotBPClass = ItmeSlot.Class;
+	}
+
+	static ConstructorHelpers::FClassFinder<UUserWidget> DieUI(TEXT("/Game/_My/UI/DieUI_BP"));
+	if (DieUI.Succeeded())
+	{
+		uiGameDieBPClass = DieUI.Class;
+	}
 }
 
 void AController_StartMenu::SetupInputComponent()
@@ -38,9 +58,12 @@ void AController_StartMenu::SetupInputComponent()
 	APlayerController::SetupInputComponent();
 
 	InputComponent->BindAction("ShowGameMenu", IE_Pressed, this, &AController_StartMenu::ShowGameMenu);
+	InputComponent->BindAction("ShowInventory", IE_Pressed, this, &AController_StartMenu::ShowInventory);
 	InputComponent->BindAction("Attack", IE_Pressed, this, &AController_StartMenu::WeaponAttack);
 	InputComponent->BindAction("ChangeWeapon", IE_Pressed, this, &AController_StartMenu::ChangeWeapon);
 }
+
+
 
 void AController_StartMenu::ShowGameMenu()
 {
@@ -50,10 +73,9 @@ void AController_StartMenu::ShowGameMenu()
 		if (uiGameMenuWidget)
 		{
 			uiGameMenuWidget->AddToViewport();
-			//isShowGameMenu = true;
 		}
+		isShowGameMenu = true;
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
 }
 
 void AController_StartMenu::CloseGameMenu()
@@ -62,16 +84,67 @@ void AController_StartMenu::CloseGameMenu()
 	isShowGameMenu = false;
 }
 
+
+void AController_StartMenu::ShowInventory()
+{
+	if (uiInventoryBPClass && isShowInventory == false)
+	{
+		uiInventoryWidget = CreateWidget<UUserWidget>(GetWorld(), uiInventoryBPClass);
+		if (uiInventoryWidget)
+		{
+			uiInventoryWidget->AddToViewport();
+		}
+		isShowInventory = true;
+	}
+
+
+}
+
+void AController_StartMenu::CreateItemSlots()
+{
+	//Show ItemSlots
+	if (uiItemSlotBPClass)
+	{
+		uiItemSlotWidget = CreateWidget<UUserWidget>(GetWorld(), uiItemSlotBPClass);\
+		if (uiItemSlotWidget)
+		{
+			uiItemSlotWidget->AddToViewport();
+		}
+	}
+}
+
+void AController_StartMenu::CloseInventory()
+{
+	uiInventoryWidget->RemoveFromViewport();
+	isShowInventory = false;
+}
+
+
 void AController_StartMenu::WeaponAttack()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
 	AMyBasicCharacter* MyCharac = Cast<AMyBasicCharacter>(GetPawn());
 	MyCharac->WeaponAttack();
 }
 
 void AController_StartMenu::ChangeWeapon()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
 	AMyBasicCharacter* MyCharac = Cast<AMyBasicCharacter>(GetPawn());
 	MyCharac->OnChangeWeapon();
+}
+
+void AController_StartMenu::ShowDieUI()
+{
+	if (uiGameDieBPClass)
+	{
+		uiGameDieWidget = CreateWidget<UUserWidget>(GetWorld(), uiGameDieBPClass);
+		if (uiGameDieWidget)
+		{
+			uiGameWidget->RemoveFromParent();
+			uiGameDieWidget->AddToViewport();
+			
+			bShowMouseCursor = true;
+			bEnableClickEvents = true;
+			bEnableMouseOverEvents = true;
+		}
+	}
 }

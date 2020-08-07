@@ -65,7 +65,12 @@ protected:
 
 	virtual void Die(float KillingDamage, struct FDamageEvent const& DamageEvent, AController* Killer,AActor* DamageCauser);
 
+	void DamageGetBack(float DeltaTime);
+	void DamageGetBackStop();
+
 	void OnDieAnimationEnd();
+
+	class UWidgetComponent* Widget_Component;
 
 public:	
 	// Called every frame
@@ -88,7 +93,18 @@ public:
 
 	bool isDuringAttack = true;
 
+	bool isGetHit;
+
 	int32 ComboAttack_Num;
+
+	UPROPERTY(EditAnywhere,BlueprintReadOnly)
+	float myHPnum;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)	
+		FString myHPbar_Text;
+
+
+
 
 	UPROPERTY(EditDefaultsOnly, Category = "MyFX")
 		UParticleSystem* GetHitFX;
@@ -101,5 +117,5 @@ public:
 	void set_health(float const new_health);
 
 private:
-	class UWidgetComponent* Widget_Component;
+
 };

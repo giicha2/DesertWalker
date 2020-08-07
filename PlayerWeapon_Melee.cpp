@@ -97,7 +97,9 @@ void APlayerWeapon_Melee::NotifyActorBeginOverlap(AActor* OtherActor)
 	{
 		if (OtherActor->IsA(AActor::StaticClass()) && isNowAttack == true&&OtherActor==MyBot)
 		{
-			UGameplayStatics::ApplyDamage(OtherActor, 10.0f, NULL, this, UDamageType::StaticClass());
+			UGameplayStatics::ApplyDamage(OtherActor, 20.0f, NULL, this, UDamageType::StaticClass());
+			isNowAttack = false;
+
 			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
 		}
 	}

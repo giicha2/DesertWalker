@@ -34,9 +34,9 @@ void AMyProjectile::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* 
 	{
 		if (OtherActor->IsA(AMyBasicCharacter::StaticClass()))
 		{
+			UGameplayStatics::ApplyDamage(OtherActor, 5.0f, NULL, this, UDamageType::StaticClass());
 			Destroy();
 
-			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Green, __FUNCTION__);
 		}
 	}
 }

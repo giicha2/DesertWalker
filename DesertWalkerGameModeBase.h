@@ -38,4 +38,17 @@ protected:
 
 public:
 	//void ChangeUI();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		FString myCharacterName_Text;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		FString myCharacterLevel_Text;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		FString myCharacterExp_Text;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		FString myCharacterScore_Text;
+
 };
