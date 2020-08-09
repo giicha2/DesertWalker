@@ -4,9 +4,12 @@
 #include "UI_Inventory_Widget.h"
 #include "Controller_StartMenu.h"
 #include "Blueprint/WidgetTree.h"
+#include "Blueprint/UserWidget.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Components/UniformGridSlot.h"
+#include "Components/HorizontalBox.h"
 #include "Engine.h"
+#include "UI_ItemSlot_Widget.h"
 
 void UUI_Inventory_Widget::NativeConstruct()
 {
@@ -16,28 +19,43 @@ void UUI_Inventory_Widget::NativeConstruct()
 		Btn_Inventory_Close->OnClicked.AddDynamic(this, &UUI_Inventory_Widget::Btn_Inventory_CloseWindow);
 	}
 
-	for (int i = 0; i < 8; i++)
-	{
-		SpawnSlots();
-		GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
-	}
 
+	//SpawnSlots();
 }
 
 
 void UUI_Inventory_Widget::SpawnSlots()
 {
-
 	AController_StartMenu* controller = Cast<AController_StartMenu>(GetOwningPlayer());
-	controller->CreateItemSlots();
-	UUserWidget* tempWidget = controller->uiItemSlotWidget;
+	
+	UUserWidget* slotWidget = controller->uiItemSlotWidget;
 
-	GridPanel_ItemSlots->AddChildToGrid(tempWidget);
-	if (UUniformGridSlot* slot = Cast< UUniformGridSlot>(tempWidget->Slot))
+	for (int i = 0; i < 8; i++)
 	{
-		slot->SetColumn(5);
-		slot->SetRow(3);
+		slotWidget = CreateWidget<UUserWidget>(GetWorld());
+		GridPanel_ItemSlots->AddChildToGrid(slotWidget);
+		MyItemSlot->AddToViewport();
 	}
+
+
+
+
+
+	//GridPanel_ItemSlots->AddChildToGrid(tempWidget);
+	//UUniformGridSlot* slotBox = Cast<UUniformGridSlot>(GetWidgetFromName(FName("GridPanel_ItemSlots")));
+	//UHorizontalBox* slotBox = Cast<UHorizontalBox>(GetWidgetFromName(FName("HorizontalBox_01")));
+	
+
+
+	//for (int i = 0; i < 5; i++)
+	//{
+		//uiItemSlotWidget = CreateWidget<UUserWidget>(GetWorld(), uiItemSlotBPClass);
+		//GridPanel_ItemSlots->AddChildToGrid(uiItemSlotWidget);
+
+		//UUserWidget* slotWidget = WidgetTree->ConstructWidget<UUI_ItemSlot_Widget>(MyWidgetClass);
+
+		//slotBox->AddChild(slotWidget);
+	//}
 
 	//GridPanel_ItemSlots->AddChildToGrid();
 

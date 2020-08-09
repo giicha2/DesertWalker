@@ -21,6 +21,9 @@ public:
 
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 		UGridPanel* GridPanel_ItemSlots = nullptr;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = MySlot)
+		UUserWidget* MyItemSlot;
 protected:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 		UButton* Btn_Inventory_Close = nullptr;

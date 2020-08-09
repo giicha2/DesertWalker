@@ -163,7 +163,9 @@ void AMyBasicCharacter::Tick(float DeltaTime)
 
 	//make HPbar on the character head above
 	auto const uw = Cast<UHPBar>(Widget_Component->GetUserWidgetObject());
-	myHPnum = MyHealth / MyMaxHealth*100.0f;
+	myHPnum = (MyHealth / MyMaxHealth*100)*0.01f;
+	UE_LOG(LogTemp, Log,TEXT("Character HP:"), myHPnum);
+
 	myHPbar_Text = FString::SanitizeFloat(MyHealth) + "/" + FString::SanitizeFloat(MyMaxHealth);
 
 	if (uw)

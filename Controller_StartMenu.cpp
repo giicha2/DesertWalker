@@ -6,6 +6,8 @@
 #include "Runtime/UMG/Public/Blueprint/UserWidget.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Engine.h"
+#include "UI_Inventory_Widget.h"
+#include "Blueprint/UserWidget.h"
 
 
 AController_StartMenu::AController_StartMenu()
@@ -38,12 +40,15 @@ AController_StartMenu::AController_StartMenu()
 	if (InventoryUI.Succeeded())
 	{
 		uiInventoryBPClass = InventoryUI.Class;
+
+		
 	}
 	
 	static ConstructorHelpers::FClassFinder<UUserWidget> ItmeSlot(TEXT("/Game/_My/UI/ItemSlot_BP"));
 	if (ItmeSlot.Succeeded())
 	{
 		uiItemSlotBPClass = ItmeSlot.Class;
+		//GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
 	}
 
 	static ConstructorHelpers::FClassFinder<UUserWidget> DieUI(TEXT("/Game/_My/UI/DieUI_BP"));
@@ -93,6 +98,7 @@ void AController_StartMenu::ShowInventory()
 		if (uiInventoryWidget)
 		{
 			uiInventoryWidget->AddToViewport();
+			//CreateItemSlots();
 		}
 		isShowInventory = true;
 	}
@@ -103,14 +109,19 @@ void AController_StartMenu::ShowInventory()
 void AController_StartMenu::CreateItemSlots()
 {
 	//Show ItemSlots
-	if (uiItemSlotBPClass)
-	{
-		uiItemSlotWidget = CreateWidget<UUserWidget>(GetWorld(), uiItemSlotBPClass);\
-		if (uiItemSlotWidget)
-		{
-			uiItemSlotWidget->AddToViewport();
-		}
-	}
+	//UUI_Inventory_Widget* MyInvenWidgetClass = Cast<UUI_Inventory_Widget>(GetWorld());
+	//
+	//UUI_Inventory_Widget* MyInvenPanel = Cast<UUI_Inventory_Widget>(GetWorld());
+	//auto s = MyInvenPanel->GridPanel_ItemSlots;
+	//
+	//for (int i = 0; i < 8; i++)
+	//{
+	//	//MyInvenWidgetClass->GridPanel_ItemSlots->AddChildToGrid(uiItemSlotWidget);
+	//	uiItemSlotWidget = CreateWidget<UUserWidget>(GetWorld(), uiItemSlotBPClass);
+	//	s->AddChildToGrid(uiItemSlotWidget);
+	//	//uiItemSlotWidget->AddToViewport();
+	//	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Blue, __FUNCTION__);
+	//}
 }
 
 void AController_StartMenu::CloseInventory()
