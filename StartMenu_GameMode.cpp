@@ -11,5 +11,6 @@ AStartMenu_GameMode::AStartMenu_GameMode()
 	HUDClass = AStartMenu_HUD::StaticClass();
 	DefaultPawnClass = nullptr;
 	PlayerControllerClass = AController_StartMenu::StaticClass();
+
 }
 

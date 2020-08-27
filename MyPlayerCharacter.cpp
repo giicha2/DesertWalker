@@ -26,6 +26,7 @@ AMyPlayerCharacter::AMyPlayerCharacter()
 
 	isDuringAttack = false;
 	ComboAttack_Num = 0;
+
 }
 
 void AMyPlayerCharacter::PostInitializeComponents()

@@ -4,11 +4,45 @@
 
 #include "CoreMinimal.h"
 #include "MyBasicCharacter.h"
+#include "Engine/DataTable.h"
 #include "MyPlayerCharacter.generated.h"
 
 /**
  * 
  */
+USTRUCT(BlueprintType)
+struct FCharacterInfo :public FTableRowBase
+{
+	GENERATED_BODY()
+public:
+	FCharacterInfo()
+	{
+		CharacterName = FText::FromString("Name");
+		CharacterLevel = 1;
+		Description = FText::FromString("My Character is ....");
+	}
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FName CharacterID;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FText CharacterName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UTexture2D* CharacterThumbnail;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 CharacterLevel;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 PlayerGold;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FText Description;
+};
+
+
+
 UCLASS()
 class DESERTWALKER_API AMyPlayerCharacter : public AMyBasicCharacter
 {
@@ -35,5 +69,7 @@ public:
 	void Attack_Melee_End();
 
 
-
+	//Item Array
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<int32> MyItemArray_ch;
 };

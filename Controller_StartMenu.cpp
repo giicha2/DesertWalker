@@ -8,12 +8,15 @@
 #include "Engine.h"
 #include "UI_Inventory_Widget.h"
 #include "Blueprint/UserWidget.h"
+#include "DesertWalkerGameModeBase.h"
+#include "MyPlayerCharacter.h"
 
 
 AController_StartMenu::AController_StartMenu()
 {
 	isShowGameMenu = false;
 	isShowInventory = false;
+
 
 	static ConstructorHelpers::FClassFinder<UUserWidget> obj(TEXT("/Game/_My/UI/HUD_BP"));
 	if (obj.Succeeded())
@@ -36,7 +39,7 @@ AController_StartMenu::AController_StartMenu()
 		uiGameMenuBPClass = gamemenuUI.Class;
 	}
 
-	static ConstructorHelpers::FClassFinder<UUserWidget> InventoryUI(TEXT("/Game/_My/UI/Inventory_BP"));
+	static ConstructorHelpers::FClassFinder<UUserWidget> InventoryUI(TEXT("/Game/_My/UI/Inventory_WidgetBP"));
 	if (InventoryUI.Succeeded())
 	{
 		uiInventoryBPClass = InventoryUI.Class;
@@ -94,11 +97,15 @@ void AController_StartMenu::ShowInventory()
 {
 	if (uiInventoryBPClass && isShowInventory == false)
 	{
+		AMyPlayerCharacter* MyPlayerCharacter = Cast<AMyPlayerCharacter>(GetOwner());
+
 		uiInventoryWidget = CreateWidget<UUserWidget>(GetWorld(), uiInventoryBPClass);
 		if (uiInventoryWidget)
 		{
-			uiInventoryWidget->AddToViewport();
+			//uiInventoryWidget->AddToViewport();
 			//CreateItemSlots();
+
+
 		}
 		isShowInventory = true;
 	}
@@ -108,6 +115,11 @@ void AController_StartMenu::ShowInventory()
 
 void AController_StartMenu::CreateItemSlots()
 {
+	bShowMouseCursor = true;
+	bEnableClickEvents = true;
+	bEnableMouseOverEvents = true;
+
+
 	//Show ItemSlots
 	//UUI_Inventory_Widget* MyInvenWidgetClass = Cast<UUI_Inventory_Widget>(GetWorld());
 	//

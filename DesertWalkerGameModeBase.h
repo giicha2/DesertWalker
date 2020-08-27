@@ -51,4 +51,8 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 		FString myCharacterScore_Text;
 
+	//Item Array
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<int32> MyItemArray;
+
 };

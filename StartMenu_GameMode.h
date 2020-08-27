@@ -16,5 +16,7 @@ class DESERTWALKER_API AStartMenu_GameMode : public AGameMode
 
 public:
 	AStartMenu_GameMode();
+
+
 	
 };

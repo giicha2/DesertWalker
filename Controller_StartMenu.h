@@ -24,7 +24,11 @@ public:
 	void CloseGameMenu();
 
 	void ShowInventory();
+
+	UFUNCTION(BlueprintCallable,Category="MyUI")
 	void CreateItemSlots();
+
+
 	void CloseInventory();
 
 	void WeaponAttack();
@@ -32,6 +36,8 @@ public:
 	void ShowDieUI();
 
 	bool isShowGameMenu;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool isShowInventory;
 
 
