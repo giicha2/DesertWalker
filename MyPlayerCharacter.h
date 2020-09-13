@@ -51,6 +51,9 @@ class DESERTWALKER_API AMyPlayerCharacter : public AMyBasicCharacter
 public:
 		AMyPlayerCharacter();
 
+		// Called when the game starts or when spawned
+		virtual void BeginPlay() override;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
 		class USpringArmComponent* CameraBoom;
 
@@ -67,9 +70,23 @@ protected:
 public:
 	void Attack_Melee();
 	void Attack_Melee_End();
-
+	int getNextLevel();
+	void setNextLevel(int value);
+	void tempLevelNum(int value);
 
 	//Item Array
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<int32> MyItemArray_ch;
+
+	//Map Gateway
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int UserMapLevel;
+
+		int tmpMapLevel;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<FString> arrMapName;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+		FString MapName;
 };

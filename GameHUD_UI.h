@@ -25,6 +25,7 @@ public:
 		UProgressBar* HUD_HPbar_value = nullptr;
 
 
+
 protected:
 	UPROPERTY(BlueprintReadOnly, meta = (BindWidget))
 		UButton* Btn_GameMenu = nullptr;

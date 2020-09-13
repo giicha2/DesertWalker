@@ -8,11 +8,11 @@
 #include "MyItem.generated.h"
 
 USTRUCT(BlueprintType)
-struct FItemInfo :public FTableRowBase
+struct FItem_Info :public FTableRowBase
 {
 	GENERATED_BODY()
 public:
-	FItemInfo()
+	FItem_Info()
 	{
 		ItemName = FText::FromString("ItemName");
 		ItemDescription = FText::FromString("This Item is ....");
@@ -27,7 +27,7 @@ public:
 		UTexture2D* ItemThumbnail;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int32 ItemLevel;
+		int32 ItemNum;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int32 ItemGold;
@@ -35,6 +35,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FText ItemDescription;
 };
+
 
 UCLASS()
 class DESERTWALKER_API AMyItem : public AActor

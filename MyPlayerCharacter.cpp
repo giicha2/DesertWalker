@@ -10,6 +10,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Engine.h"
 #include "PlayerWeapon_Melee.h"
+#include "DesertWalkerGameModeBase.h"
 
 AMyPlayerCharacter::AMyPlayerCharacter()
 {
@@ -27,12 +28,35 @@ AMyPlayerCharacter::AMyPlayerCharacter()
 	isDuringAttack = false;
 	ComboAttack_Num = 0;
 
+	//GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("Costruct_UserMapLevel  : %d"), UserMapLevel));
+
+
+}
+
+// Called when the game starts or when spawned
+void AMyPlayerCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+
+
 }
 
 void AMyPlayerCharacter::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 	SpawnDefaultInventory();
+
+	FString arrMapName[] = { TEXT("TestMap"),TEXT("Hometown"),TEXT("Grassland"),TEXT("Deathvally") };
+	if (UserMapLevel == 1)
+	{
+		MapName = arrMapName[1];
+	}
+	else
+	{
+		UserMapLevel = tmpMapLevel;
+		MapName = arrMapName[UserMapLevel];
+	}
 }
 
 void AMyPlayerCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -93,3 +117,25 @@ void AMyPlayerCharacter::Attack_Melee_End()
 {
 	isDuringAttack = false;
 }
+
+int AMyPlayerCharacter::getNextLevel()
+{
+	return 	UserMapLevel;
+	;
+}
+
+void AMyPlayerCharacter::setNextLevel(int value)
+{
+	UserMapLevel = value;
+	tempLevelNum(value);
+
+
+	GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, FString::Printf(TEXT("UserMapLevel  : %d"), UserMapLevel));
+}
+
+void AMyPlayerCharacter::tempLevelNum(int value)
+{
+	tmpMapLevel = value;
+}
+
+
