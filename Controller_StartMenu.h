@@ -24,6 +24,10 @@ public:
 	void CloseGameMenu();
 
 	void ShowInventory();
+	void ShowShopUI();
+	UFUNCTION(BlueprintCallable, Category = "MyUI")
+	void CloseShopUI();
+
 
 	UFUNCTION(BlueprintCallable,Category="MyUI")
 	void CreateItemSlots();
@@ -36,6 +40,9 @@ public:
 	void ShowDieUI();
 
 	bool isShowGameMenu;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool isShowShopMenu;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool isShowInventory;
@@ -53,6 +60,9 @@ private:
 
 	TSubclassOf<class UUserWidget>uiInventoryBPClass;
 	UUserWidget* uiInventoryWidget;
+
+	TSubclassOf<class UUserWidget>uiGameShopBPClass;
+	UUserWidget* uiGameShopWidget;
 
 	TSubclassOf<class UUserWidget>uiGameDieBPClass;
 	UUserWidget* uiGameDieWidget;

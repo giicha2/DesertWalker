@@ -15,10 +15,15 @@
 AController_StartMenu::AController_StartMenu()
 {
 	isShowGameMenu = false;
+	isShowShopMenu = false;
 	isShowInventory = false;
 
+	bShowMouseCursor = true;
+	bEnableClickEvents = true;
+	bEnableMouseOverEvents = true;
 
-	static ConstructorHelpers::FClassFinder<UUserWidget> obj(TEXT("/Game/_My/UI/HUD_BP"));
+
+	static ConstructorHelpers::FClassFinder<UUserWidget> obj(TEXT("/Game/_My/UI/HUD_WidgetBP"));
 	if (obj.Succeeded())
 	{
 		uiGameBPClass = obj.Class;
@@ -52,6 +57,12 @@ AController_StartMenu::AController_StartMenu()
 	{
 		uiItemSlotBPClass = ItmeSlot.Class;
 		//GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
+	}
+
+	static ConstructorHelpers::FClassFinder<UUserWidget> ShopUI(TEXT("/Game/_My/UI/Shop_WidgetBP"));
+	if (ShopUI.Succeeded())
+	{
+		uiGameShopBPClass = ShopUI.Class;
 	}
 
 	static ConstructorHelpers::FClassFinder<UUserWidget> DieUI(TEXT("/Game/_My/UI/DieUI_BP"));
@@ -111,6 +122,33 @@ void AController_StartMenu::ShowInventory()
 	}
 
 
+}
+
+void AController_StartMenu::ShowShopUI()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Red,"ShowShopUI");
+	isShowShopMenu = true;
+
+	//if (uiGameShopBPClass)
+	//{
+	//	uiGameDieWidget = CreateWidget<UUserWidget>(GetWorld(), uiGameShopBPClass);
+	//	if (uiGameShopWidget)
+	//	{
+	//		//uiGameWidget->RemoveFromParent();
+	//		uiGameShopWidget->AddToViewport();
+
+	//		bShowMouseCursor = true;
+	//		bEnableClickEvents = true;
+	//		bEnableMouseOverEvents = true;
+	//	}
+	//}
+
+
+}
+
+void AController_StartMenu::CloseShopUI()
+{
+	isShowShopMenu = false;
 }
 
 void AController_StartMenu::CreateItemSlots()

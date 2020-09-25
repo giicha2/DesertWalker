@@ -78,6 +78,10 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<int32> MyItemArray_ch;
 
+	//Item Array
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TArray<int32> ShopItemArray_ch;
+
 	//Map Gateway
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		int UserMapLevel;
