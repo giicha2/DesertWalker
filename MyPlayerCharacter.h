@@ -74,11 +74,11 @@ public:
 	void setNextLevel(int value);
 	void tempLevelNum(int value);
 
-	//Item Array
+	//PlayerItem Array
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<int32> MyItemArray_ch;
 
-	//Item Array
+	//ShopItem Array
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TArray<int32> ShopItemArray_ch;
 
