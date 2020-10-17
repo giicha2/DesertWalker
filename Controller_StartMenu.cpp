@@ -59,7 +59,7 @@ AController_StartMenu::AController_StartMenu()
 		//GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Black, __FUNCTION__);
 	}
 
-	static ConstructorHelpers::FClassFinder<UUserWidget> ShopUI(TEXT("/Game/_My/UI/Shop_WidgetBP"));
+	static ConstructorHelpers::FClassFinder<UUserWidget> ShopUI(TEXT("/Game/_My/UI/ShopUI_WidgetBP"));
 	if (ShopUI.Succeeded())
 	{
 		uiGameShopBPClass = ShopUI.Class;
@@ -176,7 +176,8 @@ void AController_StartMenu::CreateItemSlots()
 
 void AController_StartMenu::CloseInventory()
 {
-	uiInventoryWidget->RemoveFromViewport();
+	//uiInventoryWidget->RemoveFromViewport();
+	uiInventoryWidget->RemoveFromParent();
 	isShowInventory = false;
 }
 

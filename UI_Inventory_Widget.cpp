@@ -90,6 +90,6 @@ void UUI_Inventory_Widget::SpawnSlots()
 
 void UUI_Inventory_Widget::Btn_Inventory_CloseWindow()
 {
-	AController_StartMenu* contoller = Cast<AController_StartMenu>(GetOwningPlayer());
-	contoller->CloseInventory();
+	//AController_StartMenu* contoller = Cast<AController_StartMenu>(GetOwningPlayer());
+	//contoller->CloseInventory();
 }

@@ -32,13 +32,14 @@ public:
 	UFUNCTION(BlueprintCallable,Category="MyUI")
 	void CreateItemSlots();
 
-
+	UFUNCTION(BlueprintCallable, Category = "MyUI")
 	void CloseInventory();
 
 	void WeaponAttack();
 	void ChangeWeapon();
 	void ShowDieUI();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool isShowGameMenu;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
